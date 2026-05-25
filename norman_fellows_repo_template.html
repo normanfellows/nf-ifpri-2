@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="[REPOSITORY NAME] — [SHORT DESCRIPTION]" />
+  <title>[REPOSITORY NAME] · Norman Fellows</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #111720;
+      --panel-2: #0e141c;
+      --text: #e7edf5;
+      --muted: #94a3b8;
+      --line: rgba(255, 255, 255, 0.08);
+      --accent: #6aa7ff;
+      --accent-soft: rgba(106, 167, 255, 0.12);
+      --max-width: 1100px;
+      --radius: 18px;
+      --gap: 1.2rem;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(106, 167, 255, 0.08), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--accent); }
+
+    .wrap {
+      width: min(calc(100% - 2rem), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(11, 15, 20, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .brand strong { font-size: 1rem; }
+    .brand span { font-size: 0.9rem; color: var(--muted); }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      justify-content: flex-end;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .hero { padding: 2.2rem 0 1.2rem; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: var(--gap);
+      align-items: start;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent), var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .panel-pad { padding: 1.35rem; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 4vw, 3.3rem);
+      line-height: 1.06;
+      margin: 0 0 1rem;
+      max-width: 13ch;
+    }
+
+    .lede {
+      font-size: 1.03rem;
+      color: var(--muted);
+      max-width: 62ch;
+      margin: 0;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--text);
+      border: 1px solid rgba(106, 167, 255, 0.2);
+      font-size: 0.85rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 0.2rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .meta-item span:first-child { color: var(--muted); }
+
+    .section { padding: 1.15rem 0 0; }
+
+    .section h2 {
+      margin: 0 0 0.9rem;
+      font-size: 1.2rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+    }
+
+    .list {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.05rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-2);
+    }
+
+    .item strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .item small {
+      color: var(--muted);
+      white-space: nowrap;
+      align-self: start;
+    }
+
+    .content-block {
+      padding: 1rem 1.05rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-2);
+      margin-bottom: 0.8rem;
+    }
+
+    .content-block:last-child { margin-bottom: 0; }
+
+    .content-block h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+    }
+
+    .content-block p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer {
+      padding: 2.5rem 0 2rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-inner {
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <strong>Norman Fellows</strong>
+        <span>Repository page template</span>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="#summary">Summary</a>
+        <a href="#contents">Contents</a>
+        <a href="#notes">Notes</a>
+        <a href="#links">Links</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <article class="panel panel-pad" id="summary">
+          <div class="eyebrow">Repository</div>
+          <h1>[REPOSITORY NAME]</h1>
+          <p class="lede">
+            [One or two sentences describing the repository, its purpose, and how it relates to the wider project.]
+          </p>
+          <div class="badge-row" aria-label="Tags">
+            <span class="badge">[Tag 1]</span>
+            <span class="badge">[Tag 2]</span>
+            <span class="badge">[Tag 3]</span>
+          </div>
+        </article>
+
+        <aside class="panel panel-pad" aria-label="Repository metadata">
+          <div class="eyebrow">Status</div>
+          <div class="meta-grid">
+            <div class="meta-item"><span>Type</span><span>[HTML / CSS / Notes / Archive]</span></div>
+            <div class="meta-item"><span>Status</span><span>[Provisional / Active / Complete]</span></div>
+            <div class="meta-item"><span>Updated</span><span>[Date]</span></div>
+            <div class="meta-item"><span>Access</span><span>[Public]</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="contents">
+      <div class="wrap two-col">
+        <article class="panel panel-pad">
+          <h2>Contents</h2>
+          <div class="list">
+            <div class="item">
+              <div>
+                <strong>[Item / Folder / Page]</strong>
+                <p>[Short explanation of what belongs here.]</p>
+              </div>
+              <small>[01]</small>
+            </div>
+            <div class="item">
+              <div>
+                <strong>[Item / Folder / Page]</strong>
+                <p>[Short explanation of what belongs here.]</p>
+              </div>
+              <small>[02]</small>
+            </div>
+            <div class="item">
+              <div>
+                <strong>[Item / Folder / Page]</strong>
+                <p>[Short explanation of what belongs here.]</p>
+              </div>
+              <small>[03]</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel panel-pad" id="notes">
+          <h2>Notes</h2>
+          <div class="content-block">
+            <h3>Purpose</h3>
+            <p>[A concise note about why the repository exists.]</p>
+          </div>
+          <div class="content-block">
+            <h3>Method</h3>
+            <p>[A concise note about how the repository is being used or built.]</p>
+          </div>
+          <div class="content-block">
+            <h3>Relation to the wider site</h3>
+            <p>[A concise note about how this page links to the landing page or other repositories.]</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="links">
+      <div class="wrap two-col">
+        <article class="panel panel-pad">
+          <h2>Links</h2>
+          <div class="list">
+            <a class="item" href="#">
+              <div>
+                <strong>README</strong>
+                <p>[Link to the README or main documentation.]</p>
+              </div>
+              <small>→</small>
+            </a>
+            <a class="item" href="#">
+              <div>
+                <strong>Related page</strong>
+                <p>[Link to a related repository or page.]</p>
+              </div>
+              <small>→</small>
+            </a>
+          </div>
+        </article>
+
+        <article class="panel panel-pad">
+          <h2>Minimal footer note</h2>
+          <p class="lede" style="margin-top:0;">
+            [One sentence only, if needed. Otherwise keep this area empty and let the page rest.]
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>Norman Fellows</span>
+      <span>[Repository name]</span>
+    </div>
+  </footer>
+</body>
+</html>
